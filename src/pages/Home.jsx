@@ -1,16 +1,48 @@
+import { Link } from 'react-router-dom'
 import { useBrief } from '../hooks/useBrief'
+import { useAuth } from '../hooks/useAuth'
 import BriefBoard from '../features/brief/BriefBoard'
 import Button from '../components/Button/Button'
 
 function Home() {
   const { currentLayer, start } = useBrief()
+  const { user, logout } = useAuth()
   const hasStarted = currentLayer >= 0
 
   if (hasStarted) return <BriefBoard />
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-6">
-      <div className="flex flex-col items-center gap-8 text-center">
+    <main className="min-h-screen flex flex-col px-8 py-6">
+      <header className="flex items-center justify-between">
+        <span className="text-sm font-semibold tracking-tight text-neutral-900">À la Carte</span>
+        <div className="flex items-center gap-5">
+          {user ? (
+            <>
+              <Link
+                to="/journal"
+                className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+              >
+                Mon journal
+              </Link>
+              <button
+                onClick={logout}
+                className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors cursor-pointer"
+              >
+                Déconnexion
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+            >
+              Se connecter
+            </Link>
+          )}
+        </div>
+      </header>
+
+      <div className="flex-1 flex flex-col items-center justify-center gap-8 text-center">
         <div>
           <h1 className="text-5xl font-bold tracking-tight text-neutral-900 mb-3">
             À la Carte
