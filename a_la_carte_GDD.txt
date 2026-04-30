@@ -1,0 +1,144 @@
+======================================================
+A LA CARTE — GAME DESIGN DOCUMENT (GDD)
+Version 1.0
+======================================================
+
+------------------------------------------------------
+1. VISION DU JEU
+------------------------------------------------------
+
+Nom du jeu       : A La Carte
+Genre            : Générateur de challenges créatifs solo
+Public cible     : Apprenants en design graphique / dev web, autodidactes, créatifs en quête d'entraînement
+Plateforme       : Web (digitalisable)
+Outil de rendu   : Libre (Figma, Adobe, Canva, papier… le jeu ne dicte pas)
+
+Pitch :
+A La Carte est un générateur de briefs graphiques réalistes, construits couche par couche.
+Chaque partie simule une vraie commande client : un secteur d'activité précis, un public cible situé,
+une contrainte créative issue d'une culture du monde. L'objectif est de produire un rendu visuel
+(logo, affiche, identité…) à partir d'un brief plausible, parfois décalé, toujours ancré dans le réel.
+
+
+------------------------------------------------------
+2. PHILOSOPHIE DE DESIGN
+------------------------------------------------------
+
+- Réalisme d'abord : les clients ont un prénom, un métier, une ville réelle. Pas d'approximations.
+- Ouverture culturelle : les contraintes graphiques s'inspirent du monde entier, pas uniquement du vocabulaire occidental (wabi-sabi, bogolan, constructivisme, art ottoman, afrofuturisme…).
+- Liberté de tempo : le joueur choisit lui-même sa durée de travail. Le jeu ne chronomètre pas.
+- Polyvalence du vibe : un brief peut être banal (vraiment banal, comme en vrai) ou complètement
+  inattendu. Les deux ont de la valeur.
+- Pas de juge : pas de score, pas de correction automatisée. L'entraînement vaut pour lui-même.
+
+
+------------------------------------------------------
+3. STRUCTURE D'UNE PARTIE
+------------------------------------------------------
+
+Une partie = un brief généré en 4 couches, révélées dans l'ordre.
+
+COUCHE 1 — LE CLIENT
+  Description : identité précise du commanditaire fictif
+  Contenu      : prénom + nom, secteur, ville réelle, taille de structure
+  Exemple      : "Nadia Fontaine, ostéopathe indépendante, Lyon 3e"
+
+COUCHE 2 — LA COMMANDE
+  Description : ce que le client veut exactement
+  Contenu      : type de livrable, support, éventuellement format ou usage précis
+  Exemple      : "Un logo + carte de visite pour son cabinet, usage print et web"
+
+COUCHE 3 — LE PUBLIC CIBLE
+  Description : profil de l'audience finale, précis et situé
+  Contenu      : tranche d'âge, CSP, mode de vie, contexte géographique
+  Exemple      : "Femmes actives 30-50 ans, CSP+, urbaines, sensibles au bien-être"
+
+COUCHE 4 — LA CONTRAINTE CRÉATIVE
+  Description : limitation formelle ou inspiration culturelle imposée
+  Contenu      : contrainte de couleur, typo, style graphique ou référence culturelle mondiale
+  Exemple      : "Palette de 2 couleurs max, inspiration wabi-sabi japonais"
+
+→ Une fois les 4 couches révélées : le brief est complet.
+  Le joueur choisit sa durée de travail et se lance.
+
+
+------------------------------------------------------
+4. MÉCANIQUE DE GÉNÉRATION
+------------------------------------------------------
+
+Mode de tirage : couche par couche, dans l'ordre fixe (1 → 2 → 3 → 4)
+
+Bouton "Rejouer cette couche" : disponible sur chaque couche avant de passer à la suivante.
+  Le joueur peut redemander une nouvelle version de la couche en cours s'il la trouve trop proche
+  de quelque chose déjà fait ou trop incohérente avec ce qui précède.
+
+Bouton "Brief complet" : une fois les 4 couches tirées, affichage en vue synthèse propre,
+  prête à être utilisée comme référence pendant le travail.
+
+Tirage de la couche 4 : toutes les contraintes (formelles et culturelles) forment un unique
+  pool de tirage. Le tirage est entièrement aléatoire dans ce pool. Il n'y a pas de tirage
+  mixte garanti — une contrainte formelle et une contrainte culturelle ont la même probabilité
+  d'être tirées. La distinction formelle/culturelle est une information portée par la contrainte
+  elle-même, pas un paramètre du tirage.
+
+Cohérence inter-couches : la couche 4 (contrainte) est indépendante des autres.
+  La couche 3 (public) doit rester plausible avec la couche 1 (client).
+  Le jeu ne vérifie pas automatiquement la cohérence — c'est la richesse du contenu qui l'assure.
+
+
+------------------------------------------------------
+5. DURÉE ET MODES DE TRAVAIL
+------------------------------------------------------
+
+Le jeu ne propose pas de mode "Flash" ou "Projet" — il ne chronomètre pas.
+Le joueur décide lui-même après avoir lu le brief complet.
+
+Deux grandes temporalités naturelles :
+  - Session courte : 5 à 30 minutes (logo rapide, esquisse, exploration formelle)
+  - Projet court    : 1 jour à 1 semaine (identité visuelle complète, affiches finalisées)
+
+La durée peut être influencée par la complexité perçue du brief ou la contrainte tirée.
+Aucune règle n'est imposée par le jeu.
+
+
+------------------------------------------------------
+6. CE QUE LE JEU NE FAIT PAS
+------------------------------------------------------
+
+- Il ne juge pas le rendu
+- Il ne corrige pas
+- Il ne chronomètre pas
+- Il ne dicte pas l'outil
+- Il n'impose pas de niveau (débutant / avancé)
+- Il ne sauvegarde pas (dans cette version 1.0)
+
+
+------------------------------------------------------
+7. ÉVOLUTIONS FUTURES ENVISAGÉES
+------------------------------------------------------
+
+- Journal de bord : historique des briefs tirés + possibilité d'uploader son rendu
+- Mode Série : 3 briefs liés par un même client fictif (cohérence de marque sur plusieurs livrables)
+- Système de tags : filtrer les couches selon ce qu'on veut travailler (ex : "je veux un brief culturel")
+- Version multiplayer : chaque joueur tire le même brief, comparaison des rendus
+
+
+------------------------------------------------------
+8. NOTES DE DESIGN IMPORTANTES
+------------------------------------------------------
+
+- Les clients fictifs doivent sonner vrai : un prénom banal, un vrai quartier, un vrai secteur.
+  Éviter les noms trop inventifs, les secteurs flous ("une marque lifestyle"), les villes inventées.
+
+- Les contraintes culturelles ne doivent pas être exotisantes ou réductrices.
+  Elles doivent être précises et documentées (ex : pas "inspiration africaine" mais
+  "motifs géométriques issus du textile kente ghanéen").
+
+- La couche 2 (commande) doit être concrète : pas "créer une identité visuelle" mais
+  "un logo principal + version monochrome + favicon, format SVG et PNG".
+
+- L'ensemble du brief doit être lisible en 30 secondes. Pas de sur-explication.
+
+======================================================
+FIN DU DOCUMENT
+======================================================
