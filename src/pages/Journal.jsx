@@ -84,15 +84,22 @@ function Journal() {
             {briefs.map((brief) => (
               <div key={brief.id} className="border border-neutral-200 bg-white">
 
-                {/* Méta : date + mode */}
+                {/* Méta : date + durée + mode */}
                 <div className="flex items-center justify-between px-6 py-3 border-b border-neutral-100">
-                  <span className="text-xs text-neutral-400">{formatDate(brief.created_at)}</span>
+                  <span className="text-xs text-neutral-400">
+                    {formatDate(brief.created_at)}
+                    {brief.duration_seconds && (
+                      <span className="ml-2 text-neutral-300">·</span>
+                    )}
+                    {brief.duration_seconds && (
+                      <span className="ml-2">
+                        {formatDuration(brief.duration_seconds, brief.mode)}
+                      </span>
+                    )}
+                  </span>
                   {brief.mode && (
-                    <span className="text-xs border border-neutral-200 px-2 py-0.5 text-neutral-500 capitalize">
+                    <span className="text-xs border border-neutral-200 px-2 py-0.5 text-neutral-500">
                       {brief.mode === 'express' ? 'Carte express' : 'Carte courte'}
-                      {brief.duration_seconds
-                        ? ` · ${formatDuration(brief.duration_seconds, brief.mode)}`
-                        : ''}
                     </span>
                   )}
                 </div>
