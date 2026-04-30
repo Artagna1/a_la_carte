@@ -27,7 +27,8 @@ function Journal() {
   const { user, logout } = useAuth()
   const [briefs, setBriefs] = useState([])
   const [loading, setLoading] = useState(true)
-  const [uploading, setUploading] = useState(null)
+  const [linkInputs, setLinkInputs] = useState({})
+  const [editingLink, setEditingLink] = useState(null)
 
   useEffect(() => {
     supabase
@@ -45,31 +46,20 @@ function Journal() {
     setBriefs((prev) => prev.filter((b) => b.id !== id))
   }
 
-  async function handleUpload(briefId, file) {
-    if (!file || !user) return
-    setUploading(briefId)
+  async function saveLink(briefId) {
+    const url = (linkInputs[briefId] ?? '').trim()
+    if (!url) return
 
-    const ext = file.name.split('.').pop()
-    const path = `${user.id}/${briefId}.${ext}`
-
-    const { error: uploadError } = await supabase.storage
-      .from('renders')
-      .upload(path, file, { upsert: true })
-
-    if (uploadError) {
-      setUploading(null)
-      return
-    }
-
-    const { data: urlData } = supabase.storage.from('renders').getPublicUrl(path)
-    const renderUrl = urlData.publicUrl
-
-    await supabase.from('briefs').update({ render_url: renderUrl }).eq('id', briefId)
-
+    await supabase.from('briefs').update({ render_url: url }).eq('id', briefId)
     setBriefs((prev) =>
-      prev.map((b) => (b.id === briefId ? { ...b, render_url: renderUrl } : b))
+      prev.map((b) => (b.id === briefId ? { ...b, render_url: url } : b))
     )
-    setUploading(null)
+    setEditingLink(null)
+  }
+
+  function startEditing(briefId, currentUrl) {
+    setLinkInputs((prev) => ({ ...prev, [briefId]: currentUrl ?? '' }))
+    setEditingLink(briefId)
   }
 
   return (
@@ -117,7 +107,7 @@ function Journal() {
             {briefs.map((brief) => (
               <div key={brief.id} className="border border-neutral-200 bg-white">
 
-                {/* Méta : date + durée + mode + suppression */}
+                {/* Méta */}
                 <div className="flex items-center justify-between px-6 py-3 border-b border-neutral-100">
                   <span className="text-xs text-neutral-400">
                     {formatDate(brief.created_at)}
@@ -166,38 +156,44 @@ function Journal() {
                   </div>
                 ))}
 
-                {/* Rendu */}
+                {/* Lien vers le rendu */}
                 <div className="px-6 py-4">
-                  {brief.render_url ? (
-                    <div className="flex flex-col gap-3">
-                      <img
-                        src={brief.render_url}
-                        alt="Rendu"
-                        className="w-full max-h-80 object-contain border border-neutral-100 bg-neutral-50"
-                      />
-                      <label className="text-xs text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer underline underline-offset-2 self-start">
-                        Remplacer le rendu
-                        <input
-                          type="file"
-                          accept="image/*"
-                          className="hidden"
-                          onChange={(e) => handleUpload(brief.id, e.target.files[0])}
-                        />
-                      </label>
+                  {brief.render_url && editingLink !== brief.id ? (
+                    <div className="flex items-center justify-between gap-4">
+                      <a
+                        href={brief.render_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs text-neutral-500 underline underline-offset-2 hover:text-neutral-800 truncate transition-colors"
+                      >
+                        {brief.render_url}
+                      </a>
+                      <button
+                        onClick={() => startEditing(brief.id, brief.render_url)}
+                        className="shrink-0 text-xs text-neutral-400 hover:text-neutral-700 transition-colors cursor-pointer"
+                      >
+                        Modifier
+                      </button>
                     </div>
                   ) : (
-                    <label className="flex items-center justify-center border border-dashed border-neutral-200 px-6 py-6 cursor-pointer hover:border-neutral-400 hover:bg-neutral-50 transition-colors">
-                      <span className="text-xs text-neutral-400">
-                        {uploading === brief.id ? 'Upload en cours…' : '+ Ajouter mon rendu'}
-                      </span>
+                    <div className="flex gap-2">
                       <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        disabled={uploading === brief.id}
-                        onChange={(e) => handleUpload(brief.id, e.target.files[0])}
+                        type="url"
+                        placeholder="Lien vers ton rendu (Behance, portfolio…)"
+                        value={linkInputs[brief.id] ?? ''}
+                        onChange={(e) =>
+                          setLinkInputs((prev) => ({ ...prev, [brief.id]: e.target.value }))
+                        }
+                        onKeyDown={(e) => e.key === 'Enter' && saveLink(brief.id)}
+                        className="flex-1 border border-neutral-200 px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-300 outline-none focus:border-neutral-500 transition-colors"
                       />
-                    </label>
+                      <button
+                        onClick={() => saveLink(brief.id)}
+                        className="px-4 py-2 bg-neutral-900 text-white text-xs hover:bg-neutral-700 transition-colors cursor-pointer"
+                      >
+                        Enregistrer
+                      </button>
+                    </div>
                   )}
                 </div>
 
