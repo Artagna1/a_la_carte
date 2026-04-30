@@ -28,6 +28,11 @@ function Journal() {
   const [briefs, setBriefs] = useState([])
   const [loading, setLoading] = useState(true)
 
+  async function deleteBrief(id) {
+    await supabase.from('briefs').delete().eq('id', id)
+    setBriefs((prev) => prev.filter((b) => b.id !== id))
+  }
+
   useEffect(() => {
     supabase
       .from('briefs')
@@ -84,7 +89,7 @@ function Journal() {
             {briefs.map((brief) => (
               <div key={brief.id} className="border border-neutral-200 bg-white">
 
-                {/* Méta : date + durée + mode */}
+                {/* Méta : date + durée + mode + suppression */}
                 <div className="flex items-center justify-between px-6 py-3 border-b border-neutral-100">
                   <span className="text-xs text-neutral-400">
                     {formatDate(brief.created_at)}
@@ -97,11 +102,20 @@ function Journal() {
                       </span>
                     )}
                   </span>
-                  {brief.mode && (
-                    <span className="text-xs border border-neutral-200 px-2 py-0.5 text-neutral-500">
-                      {brief.mode === 'express' ? 'Carte express' : 'Carte courte'}
-                    </span>
-                  )}
+                  <div className="flex items-center gap-3">
+                    {brief.mode && (
+                      <span className="text-xs border border-neutral-200 px-2 py-0.5 text-neutral-500">
+                        {brief.mode === 'express' ? 'Carte express' : 'Carte courte'}
+                      </span>
+                    )}
+                    <button
+                      onClick={() => deleteBrief(brief.id)}
+                      className="text-neutral-300 hover:text-red-400 transition-colors cursor-pointer text-base leading-none"
+                      title="Supprimer ce brief"
+                    >
+                      ×
+                    </button>
+                  </div>
                 </div>
 
                 {/* Les 4 couches */}
