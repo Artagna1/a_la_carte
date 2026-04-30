@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { useBrief } from '../hooks/useBrief'
+import { useAuth } from '../hooks/useAuth'
 import { useTimer } from '../hooks/useTimer'
 import { useBriefStore } from '../store/briefStore'
 import { LAYER_CONFIG } from '../features/brief/layerConfig'
@@ -13,6 +14,7 @@ const MODE_LABELS = {
 
 function Summary() {
   const { layers, reset } = useBrief()
+  const { user, logout } = useAuth()
   const setChosenDuration = useBriefStore((s) => s.setChosenDuration)
   const navigate = useNavigate()
   const { mode, totalSeconds, display, isExpired, start } = useTimer()
@@ -31,7 +33,37 @@ function Summary() {
   }
 
   return (
-    <main className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center px-6 py-16">
+    <main className="min-h-screen bg-neutral-50 flex flex-col px-8 py-6">
+      <header className="flex items-center justify-between mb-10">
+        <span className="text-sm font-semibold tracking-tight text-neutral-900">À la Carte</span>
+        <div className="flex items-center gap-5">
+          {user ? (
+            <>
+              <Link
+                to="/journal"
+                className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+              >
+                Mon journal
+              </Link>
+              <button
+                onClick={logout}
+                className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors cursor-pointer"
+              >
+                Déconnexion
+              </button>
+            </>
+          ) : (
+            <Link
+              to="/login"
+              className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+            >
+              Se connecter
+            </Link>
+          )}
+        </div>
+      </header>
+
+      <div className="flex-1 flex flex-col items-center justify-center">
       <div className="w-full max-w-2xl">
 
         <div className="mb-12 text-center">
@@ -117,6 +149,7 @@ function Summary() {
           </Button>
         </div>
 
+      </div>
       </div>
     </main>
   )
