@@ -28,7 +28,11 @@ function Login() {
     if (mode === 'login') {
       const { error } = await login(email, password)
       if (error) {
-        setError('Identifiants incorrects. Vérifie ton email et ton mot de passe.')
+        if (error.message === 'Email not confirmed') {
+          setError('Tu dois confirmer ton email avant de te connecter. Vérifie ta boîte mail.')
+        } else {
+          setError('Identifiants incorrects. Vérifie ton email et ton mot de passe.')
+        }
       } else {
         navigate('/')
       }
