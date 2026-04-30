@@ -1,9 +1,16 @@
+import { useNavigate } from 'react-router-dom'
 import { useBrief } from '../hooks/useBrief'
 import { LAYER_CONFIG } from '../features/brief/layerConfig'
 import Button from '../components/Button/Button'
 
 function Summary() {
   const { layers, reset } = useBrief()
+  const navigate = useNavigate()
+
+  function handleReset() {
+    reset()
+    navigate('/')
+  }
 
   return (
     <main className="min-h-screen bg-neutral-50 flex flex-col items-center justify-center px-6 py-16">
@@ -46,7 +53,7 @@ function Summary() {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <Button onClick={reset} variant="secondary">
+          <Button onClick={handleReset} variant="secondary">
             Nouveau brief
           </Button>
         </div>

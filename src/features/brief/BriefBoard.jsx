@@ -1,9 +1,16 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { useBrief } from '../../hooks/useBrief'
 import { LAYER_CONFIG } from './layerConfig'
 import LayerPanel from '../../components/LayerPanel/LayerPanel'
 
 function BriefBoard() {
-  const { layers, currentLayer, redraw, next } = useBrief()
+  const { layers, currentLayer, isComplete, redraw, next } = useBrief()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (isComplete) navigate('/summary')
+  }, [isComplete, navigate])
 
   function getStatus(i) {
     if (i < currentLayer) return 'revealed'
