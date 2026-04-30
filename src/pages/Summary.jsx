@@ -3,6 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { useBrief } from '../hooks/useBrief'
 import { useAuth } from '../hooks/useAuth'
 import { useTimer } from '../hooks/useTimer'
+import { useSaveBrief } from '../hooks/useSaveBrief'
 import { useBriefStore } from '../store/briefStore'
 import { LAYER_CONFIG } from '../features/brief/layerConfig'
 import Button from '../components/Button/Button'
@@ -16,12 +17,18 @@ function Summary() {
   const { layers, reset } = useBrief()
   const { user, logout } = useAuth()
   const setChosenDuration = useBriefStore((s) => s.setChosenDuration)
+  const setChosenMode = useBriefStore((s) => s.setChosenMode)
   const navigate = useNavigate()
   const { mode, totalSeconds, display, isExpired, start } = useTimer()
 
+  useSaveBrief(layers)
+
   useEffect(() => {
-    if (totalSeconds !== null) setChosenDuration(totalSeconds)
-  }, [totalSeconds, setChosenDuration])
+    if (totalSeconds !== null) {
+      setChosenDuration(totalSeconds)
+      setChosenMode(mode)
+    }
+  }, [totalSeconds, mode, setChosenDuration, setChosenMode])
 
   function handleReset() {
     reset()
