@@ -27,11 +27,7 @@ function Journal() {
   const { user, logout } = useAuth()
   const [briefs, setBriefs] = useState([])
   const [loading, setLoading] = useState(true)
-
-  async function deleteBrief(id) {
-    await supabase.from('briefs').delete().eq('id', id)
-    setBriefs((prev) => prev.filter((b) => b.id !== id))
-  }
+  const [uploading, setUploading] = useState(null)
 
   useEffect(() => {
     supabase
@@ -43,6 +39,38 @@ function Journal() {
         setLoading(false)
       })
   }, [])
+
+  async function deleteBrief(id) {
+    await supabase.from('briefs').delete().eq('id', id)
+    setBriefs((prev) => prev.filter((b) => b.id !== id))
+  }
+
+  async function handleUpload(briefId, file) {
+    if (!file || !user) return
+    setUploading(briefId)
+
+    const ext = file.name.split('.').pop()
+    const path = `${user.id}/${briefId}.${ext}`
+
+    const { error: uploadError } = await supabase.storage
+      .from('renders')
+      .upload(path, file, { upsert: true })
+
+    if (uploadError) {
+      setUploading(null)
+      return
+    }
+
+    const { data: urlData } = supabase.storage.from('renders').getPublicUrl(path)
+    const renderUrl = urlData.publicUrl
+
+    await supabase.from('briefs').update({ render_url: renderUrl }).eq('id', briefId)
+
+    setBriefs((prev) =>
+      prev.map((b) => (b.id === briefId ? { ...b, render_url: renderUrl } : b))
+    )
+    setUploading(null)
+  }
 
   return (
     <main className="min-h-screen bg-neutral-50 flex flex-col px-8 py-6">
@@ -127,7 +155,7 @@ function Journal() {
                 ].map(({ config, data }) => (
                   <div
                     key={config.number}
-                    className="flex gap-6 px-6 py-4 border-b border-neutral-100 last:border-b-0"
+                    className="flex gap-6 px-6 py-4 border-b border-neutral-100"
                   >
                     <span className="shrink-0 w-28 text-xs uppercase tracking-widest text-neutral-400 pt-0.5">
                       {config.label}
@@ -137,6 +165,41 @@ function Journal() {
                     </p>
                   </div>
                 ))}
+
+                {/* Rendu */}
+                <div className="px-6 py-4">
+                  {brief.render_url ? (
+                    <div className="flex flex-col gap-3">
+                      <img
+                        src={brief.render_url}
+                        alt="Rendu"
+                        className="w-full max-h-80 object-contain border border-neutral-100 bg-neutral-50"
+                      />
+                      <label className="text-xs text-neutral-400 hover:text-neutral-600 transition-colors cursor-pointer underline underline-offset-2 self-start">
+                        Remplacer le rendu
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => handleUpload(brief.id, e.target.files[0])}
+                        />
+                      </label>
+                    </div>
+                  ) : (
+                    <label className="flex items-center justify-center border border-dashed border-neutral-200 px-6 py-6 cursor-pointer hover:border-neutral-400 hover:bg-neutral-50 transition-colors">
+                      <span className="text-xs text-neutral-400">
+                        {uploading === brief.id ? 'Upload en cours…' : '+ Ajouter mon rendu'}
+                      </span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        disabled={uploading === brief.id}
+                        onChange={(e) => handleUpload(brief.id, e.target.files[0])}
+                      />
+                    </label>
+                  )}
+                </div>
 
               </div>
             ))}
