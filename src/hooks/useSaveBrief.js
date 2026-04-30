@@ -5,7 +5,7 @@ import { useAuthStore } from '../store/authStore'
 
 export function useSaveBrief(layers) {
   const user = useAuthStore((s) => s.user)
-  const { isSaved, chosenDuration, chosenMode, markAsSaved } = useBriefStore()
+  const { isSaved, markAsSaved } = useBriefStore()
   const saveAttempted = useRef(false)
 
   useEffect(() => {
@@ -21,11 +21,11 @@ export function useSaveBrief(layers) {
         commande: layers[1],
         public_cible: layers[2],
         contrainte: layers[3],
-        mode: chosenMode,
-        duration_seconds: chosenDuration,
       })
-      .then(({ error }) => {
-        if (!error) markAsSaved()
+      .select('id')
+      .single()
+      .then(({ data, error }) => {
+        if (!error && data) markAsSaved(data.id)
       })
-  }, [user, isSaved, layers, chosenDuration, chosenMode, markAsSaved])
+  }, [user, isSaved, layers, markAsSaved])
 }

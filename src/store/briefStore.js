@@ -7,6 +7,7 @@ export const useBriefStore = create((set) => ({
   chosenDuration: null,
   chosenMode: null,
   isSaved: false,
+  savedBriefId: null,
 
   startGame: (firstDraw) =>
     set({
@@ -36,7 +37,7 @@ export const useBriefStore = create((set) => ({
 
   setChosenDuration: (duration) => set({ chosenDuration: duration }),
   setChosenMode: (mode) => set({ chosenMode: mode }),
-  markAsSaved: () => set({ isSaved: true }),
+  markAsSaved: (id) => set({ isSaved: true, savedBriefId: id }),
 
   reset: () =>
     set({
@@ -46,5 +47,6 @@ export const useBriefStore = create((set) => ({
       chosenDuration: null,
       chosenMode: null,
       isSaved: false,
+      savedBriefId: null,
     }),
 }))

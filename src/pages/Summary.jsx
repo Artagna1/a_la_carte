@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { supabase } from '../lib/supabase'
 import { useBrief } from '../hooks/useBrief'
 import { useAuth } from '../hooks/useAuth'
 import { useTimer } from '../hooks/useTimer'
@@ -16,19 +17,20 @@ const MODE_LABELS = {
 function Summary() {
   const { layers, reset } = useBrief()
   const { user, logout } = useAuth()
-  const setChosenDuration = useBriefStore((s) => s.setChosenDuration)
-  const setChosenMode = useBriefStore((s) => s.setChosenMode)
+  const savedBriefId = useBriefStore((s) => s.savedBriefId)
   const navigate = useNavigate()
   const { mode, totalSeconds, display, isExpired, start } = useTimer()
 
   useSaveBrief(layers)
 
   useEffect(() => {
-    if (totalSeconds !== null) {
-      setChosenDuration(totalSeconds)
-      setChosenMode(mode)
-    }
-  }, [totalSeconds, mode, setChosenDuration, setChosenMode])
+    if (!totalSeconds || !savedBriefId) return
+    supabase
+      .from('briefs')
+      .update({ mode, duration_seconds: totalSeconds })
+      .eq('id', savedBriefId)
+      .then(() => {})
+  }, [totalSeconds, mode, savedBriefId])
 
   function handleReset() {
     reset()
