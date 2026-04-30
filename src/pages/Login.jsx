@@ -5,8 +5,8 @@ import Button from '../components/Button/Button'
 
 function Login() {
   const [mode, setMode] = useState('login')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [nom, setNom] = useState('')
+  const [secret, setSecret] = useState('')
   const [error, setError] = useState(null)
   const [info, setInfo] = useState(null)
   const [submitting, setSubmitting] = useState(false)
@@ -26,23 +26,22 @@ function Login() {
     setSubmitting(true)
 
     if (mode === 'login') {
-      const { error } = await login(email, password)
+      const { error } = await login(nom, secret)
       if (error) {
-        if (error.message === 'Email not confirmed') {
-          setError('Tu dois confirmer ton email avant de te connecter. Vérifie ta boîte mail.')
-        } else {
-          setError('Identifiants incorrects. Vérifie ton email et ton mot de passe.')
-        }
+        setError('Nom d'artiste ou secret incorrect.')
       } else {
         navigate('/')
       }
     } else {
-      const { error } = await signup(email, password)
+      const { error } = await signup(nom, secret)
       if (error) {
-        setError(error.message)
+        if (error.message.includes('already registered')) {
+          setError('Ce nom d'artiste est déjà pris. Choisis-en un autre.')
+        } else {
+          setError('Une erreur est survenue. Réessaie.')
+        }
       } else {
-        setInfo('Compte créé ! Vérifie tes emails pour confirmer, puis connecte-toi.')
-        switchMode('login')
+        navigate('/')
       }
     }
 
@@ -62,7 +61,6 @@ function Login() {
           </Link>
         </div>
 
-        {/* Toggle connexion / inscription */}
         <div className="flex border border-neutral-200 bg-white mb-6">
           <button
             type="button"
@@ -90,18 +88,18 @@ function Login() {
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
-            type="email"
-            placeholder="Adresse email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="text"
+            placeholder="Nom d'artiste"
+            value={nom}
+            onChange={(e) => setNom(e.target.value)}
             required
             className="border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-neutral-500 transition-colors"
           />
           <input
             type="password"
-            placeholder="Mot de passe"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Secret d'artiste"
+            value={secret}
+            onChange={(e) => setSecret(e.target.value)}
             required
             className="border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder:text-neutral-400 outline-none focus:border-neutral-500 transition-colors"
           />
