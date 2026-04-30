@@ -28,7 +28,7 @@ function Login() {
     if (mode === 'login') {
       const { error } = await login(nom, secret)
       if (error) {
-        setError('Nom d'artiste ou secret incorrect.')
+        setError("Nom d'artiste ou secret incorrect.")
       } else {
         navigate('/')
       }
@@ -36,7 +36,7 @@ function Login() {
       const { error } = await signup(nom, secret)
       if (error) {
         if (error.message.includes('already registered')) {
-          setError('Ce nom d'artiste est déjà pris. Choisis-en un autre.')
+          setError("Ce nom d'artiste est déjà pris. Choisis-en un autre.")
         } else {
           setError('Une erreur est survenue. Réessaie.')
         }
