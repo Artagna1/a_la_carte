@@ -4,6 +4,7 @@ export const useBriefStore = create((set) => ({
   layers: [null, null, null, null],
   currentLayer: -1,
   isComplete: false,
+  chosenDuration: null,
 
   startGame: (firstDraw) =>
     set({
@@ -31,10 +32,13 @@ export const useBriefStore = create((set) => ({
       }
     }),
 
+  setChosenDuration: (duration) => set({ chosenDuration: duration }),
+
   reset: () =>
     set({
       layers: [null, null, null, null],
       currentLayer: -1,
       isComplete: false,
+      chosenDuration: null,
     }),
 }))
