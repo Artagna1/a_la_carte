@@ -29,8 +29,8 @@ const CARDS = {
   commandes:  Array.from({ length: 20 }, (_, i) => `o${String(i + 1).padStart(2, '0')}`),
   publics:    Array.from({ length: 20 }, (_, i) => `p${String(i + 1).padStart(2, '0')}`),
   contraintes: [
-    ...Array.from({ length: 15 }, (_, i) => `f${String(i + 1).padStart(2, '0')}`),
-    ...Array.from({ length: 20 }, (_, i) => `c${String(i + 1).padStart(2, '0')}`),
+    ...Array.from({ length: 15 }, (_, i) => `cf${String(i + 1).padStart(2, '0')}`),
+    ...Array.from({ length: 20 }, (_, i) => `cc${String(i + 1).padStart(2, '0')}`),
   ],
 }
 
