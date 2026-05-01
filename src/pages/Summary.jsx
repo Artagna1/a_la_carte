@@ -115,7 +115,7 @@ function Summary() {
                   )}
                 </div>
                 <img
-                  src={getIllustrationUrl(config.type, item.id, 'thumb')}
+                  src={getIllustrationUrl(config.type, item.id, 'thumb', item.ext)}
                   alt=""
                   aria-hidden="true"
                   className="shrink-0 w-16 h-16 object-cover"

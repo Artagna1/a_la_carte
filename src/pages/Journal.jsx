@@ -232,7 +232,7 @@ function Journal() {
                       {config.renderContent(data)}
                     </p>
                     <img
-                      src={getIllustrationUrl(config.type, data?.id, 'thumb')}
+                      src={getIllustrationUrl(config.type, data?.id, 'thumb', data?.ext)}
                       alt=""
                       aria-hidden="true"
                       className="shrink-0 w-12 h-12 object-cover"

@@ -17,7 +17,7 @@ function LayerPanel({ config, item, status, onRedraw, onNext, isLast }) {
       {/* Illustration de fond */}
       {hasContent && (
         <img
-          src={getIllustrationUrl(config.type, item.id, 'bg')}
+          src={getIllustrationUrl(config.type, item.id, 'bg', item.ext)}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 w-full h-full object-cover"
