@@ -39,6 +39,7 @@ function Journal() {
     supabase
       .from('briefs')
       .select('*')
+      .eq('user_id', user.id)
       .order('created_at', { ascending: false })
       .then(({ data }) => {
         setBriefs(data ?? [])
