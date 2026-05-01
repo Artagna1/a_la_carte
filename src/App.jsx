@@ -7,6 +7,7 @@ import Summary from './pages/Summary'
 import Login from './pages/Login'
 import Journal from './pages/Journal'
 import GlobalJournal from './pages/GlobalJournal'
+import About from './pages/About'
 import Dashboard from './pages/Dashboard'
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
 
@@ -34,6 +35,7 @@ function App() {
         <ProtectedRoute><Journal /></ProtectedRoute>
       } />
       <Route path="/monde" element={<GlobalJournal />} />
+      <Route path="/a-propos" element={<About />} />
       <Route path="/dashboard" element={
         <ProtectedRoute><Dashboard /></ProtectedRoute>
       } />

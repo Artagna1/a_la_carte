@@ -17,6 +17,12 @@ function Home() {
         <span className="text-sm font-semibold tracking-tight text-neutral-900">À la Carte</span>
         <div className="flex items-center gap-5">
           <Link
+            to="/a-propos"
+            className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+          >
+            C'est quoi À la Carte ?
+          </Link>
+          <Link
             to="/monde"
             className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
           >

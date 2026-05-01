@@ -95,6 +95,12 @@ function Journal() {
         <div className="flex items-center gap-5">
           <span className="text-xs text-neutral-400">{user?.user_metadata?.nom_artiste ?? ''}</span>
           <Link
+            to="/a-propos"
+            className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+          >
+            C'est quoi À la Carte ?
+          </Link>
+          <Link
             to="/monde"
             className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
           >
