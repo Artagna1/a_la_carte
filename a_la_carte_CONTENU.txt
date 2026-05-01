@@ -1,166 +1,140 @@
 ======================================================
 A LA CARTE — BASE DE CONTENU DES 4 COUCHES
-Version 1.0
+Version 2.0
 ======================================================
 
-Note de lecture :
-Chaque entrée est une valeur possible pour la couche concernée.
-En jeu, une seule entrée est tirée aléatoirement par couche.
-Le joueur peut "rejouer" la couche pour en obtenir une autre.
+------------------------------------------------------
+CLIENTS — c01 à c30
+Règle : Prénom Nom — Métier précis — Ville réelle (quartier si grande ville)
+------------------------------------------------------
 
-======================================================
-COUCHE 1 — LE CLIENT
-======================================================
+c01. Nadia Fontaine — Ostéopathe indépendante — Lyon 3e
+c02. Karim Belkadi — Torréfacteur artisan, 1 boutique — Bordeaux Chartrons
+c03. Ingrid Sørensen — Photographe de mariage — Strasbourg
+c04. Thomas Guerrero — Plombier-chauffagiste à son compte — Toulouse Rangueil
+c05. Amara Diallo — Créatrice de bijoux en laiton recyclé — Paris 11e
+c06. Luc Martineau — Expert-comptable, cabinet de 4 personnes — Nantes
+c07. Fatima El Idrissi — Sage-femme libérale — Montpellier
+c08. Julien Brard — Food truck burger, marché hebdomadaire — Rennes
+c09. Céline Park — Professeure de yoga prénatal — Grenoble
+c10. Marco Fabbri — Luthier, fabrication et réparation — Marseille Cours Julien
+c11. Aissatou Sy — Coiffeuse afro, salon à domicile — Saint-Denis (93)
+c12. Pierre-Emmanuel Vidal — Avocat spécialisé en droit du travail — Lille
+c13. Sonia Kremer — Fleuriste événementielle (mariages, deuils) — Metz
+c14. Baptiste Auger — Moniteur auto-école — Clermont-Ferrand
+c15. Yasmine Bouzid — Diététicienne-nutritionniste — Nice
+c16. Hervé Lemoigne — Viticulteur en biodynamie, 8 hectares — Saumur
+c17. Léa Thiriet — Illustratrice jeunesse freelance — Tours
+c18. Omar Hadj — Mécanicien moto, atelier indépendant — Mulhouse
+c19. Clara Voss — Architecte d'intérieur, atelier solo — Paris 20e
+c20. Didier Tanguy — Ostréiculteur, vente directe — Cancale
+c21. Priya Sharma — Consultante RH indépendante — Lyon Part-Dieu
+c22. Sam Leclerc — DJ résidant en club, aussi producteur — Nantes
+c23. Margot Duval — Libraire spécialisée BD & manga — Toulouse
+c24. Antoine Berthier — Coach sportif, home training en ligne — Bordeaux
+c25. Rokia Coulibaly — Traiteur cuisine malienne — Montreuil (93)
+c26. Vincent Hoareau — Guide de randonnée — La Réunion, Saint-Pierre
+c27. Elisa Marchetti — Naturopathe et herboriste — Annecy
+c28. Mehdi Ouali — Développeur freelance, spé. applis mobiles — Remote/Paris
+c29. Sylvie Garnier — Créatrice de céramiques utilitaires — Limoges
+c30. Nico Ferreira — Tatoueur, style dotwork et géométrique — Paris 18e
 
-Format : Prénom Nom — Métier — Ville
 
-01. Nadia Fontaine — Ostéopathe indépendante — Lyon 3e
-02. Karim Belkadi — Torréfacteur artisan, 1 boutique — Bordeaux Chartrons
-03. Ingrid Sørensen — Photographe de mariage — Strasbourg
-04. Thomas Guerrero — Plombier-chauffagiste à son compte — Toulouse Rangueil
-05. Amara Diallo — Créatrice de bijoux en laiton recyclé — Paris 11e
-06. Luc Martineau — Expert-comptable, cabinet de 4 personnes — Nantes
-07. Fatima El Idrissi — Sage-femme libérale — Montpellier
-08. Julien Brard — Food truck burger, marché hebdomadaire — Rennes
-09. Céline Park — Professeure de yoga prénatal — Grenoble
-10. Marco Fabbri — Luthier, fabrication et réparation — Marseille Cours Julien
-11. Aissatou Sy — Coiffeuse afro, salon à domicile — Saint-Denis (93)
-12. Pierre-Emmanuel Vidal — Avocat spécialisé en droit du travail — Lille
-13. Sonia Kremer — Fleuriste événementielle (mariages, deuils) — Metz
-14. Baptiste Auger — Moniteur auto-école — Clermont-Ferrand
-15. Yasmine Bouzid — Diététicienne-nutritionniste — Nice
-16. Hervé Lemoigne — Viticulteur en biodynamie, 8 hectares — Saumur
-17. Léa Thiriet — Illustratrice jeunesse freelance — Tours
-18. Omar Hadj — Mécanicien moto, atelier indépendant — Mulhouse
-19. Clara Voss — Architecte d'intérieur, atelier solo — Paris 20e
-20. Didier Tanguy — Ostréiculteur, vente directe — Cancale
-21. Priya Sharma — Consultante RH indépendante — Lyon Part-Dieu
-22. Sam Leclerc — DJ résidant en club, aussi producteur — Nantes
-23. Margot Duval — Libraire spécialisée BD & manga — Toulouse
-24. Antoine Berthier — Coach sportif, home training en ligne — Bordeaux
-25. Rokia Coulibaly — Traiteur cuisine malienne — Montreuil (93)
-26. Vincent Hoareau — Guide de randonnée — La Réunion, Saint-Pierre
-27. Elisa Marchetti — Naturopathe et herboriste — Annecy
-28. Mehdi Ouali — Développeur freelance, spé. applis mobiles — Remote/Paris
-29. Sylvie Garnier — Créatrice de céramiques utilitaires — Limoges
-30. Nico Ferreira — Tatoueur, style dotwork et géométrique — Paris 18e
+------------------------------------------------------
+COMMANDES — o01 à o20
+Règle : Livrable précis + format + usage — éviter les formulations vagues
+------------------------------------------------------
 
-======================================================
-COUCHE 2 — LA COMMANDE
-======================================================
+o01. Logo principal + version monochrome + favicon — usage web et print (carte de visite)
+o02. Affiche A3 pour un événement unique (date fictive dans 6 semaines) — impression offset
+o03. Identité visuelle complète : logo, palette, typographies, exemples d'application
+o04. Carte de visite recto-verso — format standard 85x55mm — impression numérique
+o05. Bannière de réseaux sociaux (Instagram + Facebook) + photo de profil
+o06. Menu déroulant à emporter — format A5 recto, impression rapide
+o07. Autocollant de packaging pour bocaux ou sachets — format rond Ø60mm
+o08. Logo + charte couleur succincte (3 couleurs max) — livrable PDF
+o09. Flyer A5 recto-verso pour distribution en boîtes aux lettres
+o10. Affiche de vitrine A2 — message principal : nouvelle prestation ou ouverture
+o11. Entête de devis / facture — format Word ou PDF modifiable
+o12. Logo animé simple (boucle 2-3 secondes) — usage stories Instagram
+o13. Kit réseaux : 3 templates de post carrés 1080x1080px (même charte)
+o14. Étiquette de bouteille, format portrait 90x130mm — vin / huile / bière
+o15. Panneau de signalétique extérieur — format A0 — lecture à 5 mètres
+o16. Logo + version horizontale + version icône seule
+o17. Programme ou planning imprimé — format A4, recto, 1 couleur de fond
+o18. Couverture de brochure A5, 8 pages — à illustrer, intérieur non inclus
+o19. T-shirt ou totebag — visuel sérigraphiable (1 à 3 couleurs)
+o20. Papier à en-tête A4 + signature mail assortie
 
-Format : Livrable précis + contexte d'usage
 
-01. Logo principal + version monochrome + favicon — usage web et print (carte de visite)
-02. Affiche A3 pour un événement unique (date fictive dans 6 semaines) — impression offset
-03. Identité visuelle complète : logo, palette, typographies, exemples d'application
-04. Carte de visite recto-verso — format standard 85x55mm — impression numérique
-05. Bannière de réseaux sociaux (Instagram + Facebook) + photo de profil
-06. Menu déroulant à emporter — format A5 recto, impression rapide
-07. Autocollant de packaging pour bocaux ou sachets — format rond Ø60mm
-08. Logo + charte couleur succincte (3 couleurs max) — livrable PDF
-09. Flyer A5 recto-verso pour distribution en boîtes aux lettres
-10. Affiche de vitrine A2 — message principal : nouvelle prestation ou ouverture
-11. Entête de devis / facture — format Word ou PDF modifiable
-12. Logo animé simple (boucle 2-3 secondes) — usage stories Instagram
-13. Kit réseaux : 3 templates de post carrés 1080x1080px (même charte)
-14. Étiquette de bouteille, format portrait 90x130mm — vin / huile / bière
-15. Panneau de signalétique extérieur — format A0 — lecture à 5 mètres
-16. Logo + version horizontale + version icône seule
-17. Programme ou planning imprimé — format A4, recto, 1 couleur de fond
-18. Couverture de brochure A5, 8 pages — à illustrer, intérieur non inclus
-19. T-shirt ou totebag — visuel sérigraphiable (1 à 3 couleurs)
-20. Papier à en-tête A4 + signature mail assortie
+------------------------------------------------------
+PUBLICS — p01 à p20
+Règle : Âge + CSP + comportement ou contexte — éviter les cibles trop larges
+------------------------------------------------------
 
-======================================================
-COUCHE 3 — LE PUBLIC CIBLE
-======================================================
+p01. Femmes 30-50 ans, CSP+, urbaines, sensibles au bien-être et au slow living
+p02. Hommes 25-40 ans, passionnés de moto, pratique du dimanche et des voyages
+p03. Parents de 28-42 ans, primo-accédants, cherchant artisans de confiance
+p04. Retraités 60-75 ans, aisés, cultivés, amateurs de produits locaux
+p05. Étudiants 18-25 ans, urbains, fauchés mais curieux, très présents sur Instagram
+p06. Professionnels de santé libéraux cherchant un sous-traitant ou fournisseur
+p07. Couples 30-45 ans en train de planifier un mariage, budget moyen-haut
+p08. Femmes 20-35 ans, diaspora africaine ou antillaise, très identitaires
+p09. Entrepreneurs locaux, 35-55 ans, peu à l'aise avec le numérique
+p10. Amateurs de cuisine du monde, 28-50 ans, CSP+, abonnés à des newsletters food
+p11. Adolescents 13-18 ans, gamers, hypersensibles à l'authenticité des marques
+p12. Seniors 65+ ans, peu connectés, habitués des marchés et du bouche-à-oreille
+p13. Cadres en reconversion professionnelle, 38-50 ans, en quête de sens
+p14. Familles de classe moyenne, 2 enfants, contrainte budgétaire forte
+p15. Touristes étrangers anglophones visitant une région française (Provence, Bretagne…)
+p16. Professeurs et chercheurs, 30-55 ans, sensibles à la rigueur et à la sobriété
+p17. Communauté de sportifs amateurs, 25-45 ans, ultra-connectés, adeptes du challenge
+p18. Habitants d'une ville moyenne (50-100k hab.), attachés au commerce local
+p19. Femmes 45-65 ans, CSP intermédiaire, public de salons de beauté et bien-être
+p20. Professionnels de la restauration (chefs, gérants) cherchant un fournisseur
 
-Format : Profil précis avec âge, CSP, contexte
 
-01. Femmes 30-50 ans, CSP+, urbaines, sensibles au bien-être et au slow living
-02. Hommes 25-40 ans, passionnés de moto, pratique du dimanche et des voyages
-03. Parents de 28-42 ans, primo-accédants, cherchant artisans de confiance
-04. Retraités 60-75 ans, aisés, cultivés, amateurs de produits locaux
-05. Étudiants 18-25 ans, urbains, fauchés mais curieux, très présents sur Instagram
-06. Professionnels de santé libéraux cherchant un sous-traitant ou fournisseur
-07. Couples 30-45 ans en train de planifier un mariage, budget moyen-haut
-08. Femmes 20-35 ans, diaspora africaine ou antillaise, très identitaires
-09. Entrepreneurs locaux, 35-55 ans, peu à l'aise avec le numérique
-10. Amateurs de cuisine du monde, 28-50 ans, CSP+, abonnés à des newsletters food
-11. Adolescents 13-18 ans, gamers, hypersensibles à l'authenticité des marques
-12. Seniors 65+ ans, peu connectés, habitués des marchés et du bouche-à-oreille
-13. Cadres en reconversion professionnelle, 38-50 ans, en quête de sens
-14. Familles de classe moyenne, 2 enfants, contrainte budgétaire forte
-15. Touristes étrangers anglophones visitant une région française (Provence, Bretagne…)
-16. Professeurs et chercheurs, 30-55 ans, sensibles à la rigueur et à la sobriété
-17. Communauté de sportifs amateurs, 25-45 ans, ultra-connectés, adeptes du challenge
-18. Habitants d'une ville moyenne (50-100k hab.), attachés au commerce local
-19. Femmes 45-65 ans, CSP intermédiaire, public de salons de beauté et bien-être
-20. Professionnels de la restauration (chefs, gérants) cherchant un fournisseur
+------------------------------------------------------
+CONTRAINTES — cf01 à cf15 · cc01 à cc20
+Règle : Pool unique de 35 entrées, tirage entièrement aléatoire
+         Les contraintes culturelles doivent être documentables et précises
+------------------------------------------------------
 
-======================================================
-COUCHE 4 — LA CONTRAINTE CRÉATIVE
-======================================================
-
-Règle de tirage : toutes les contraintes ci-dessous forment un unique pool de 35 entrées.
-Le tirage est entièrement aléatoire dans ce pool — il n'y a pas de garantie qu'une contrainte
-formelle ou culturelle soit tirée en priorité. La mention [Formelle] ou [Culturelle] est
-portée par chaque entrée à titre informatif uniquement, et servira de base au système de tags
-prévu en V2. Elle n'influence pas le tirage.
-
-01. [Formelle] Palette de 2 couleurs maximum (hors blanc et noir)
-02. [Formelle] Typographie uniquement — zéro illustration, zéro icône
-03. [Formelle] Monochrome strict (noir seul ou 1 couleur + blanc)
-04. [Formelle] Une seule famille typographique pour tout le document
-05. [Formelle] Pas de photographie — illustration vectorielle uniquement
-06. [Formelle] Composition centrée et symétrique dans les deux axes
-07. [Formelle] Grille stricte de 12 colonnes — aucun élément hors grille
-08. [Formelle] Taille de corps minimum 14pt — accessibilité premier plan
-09. [Formelle] Pas de dégradé, pas d'ombre portée — à plat uniquement
-10. [Formelle] Seulement 3 éléments visuels distincts sur l'ensemble du livrable
-11. [Formelle] Hauteur de casse uniquement (lettres capitales exclusivement)
-12. [Formelle] Format imposé : format carré — toute composition doit s'y adapter
-13. [Formelle] Contraste maximal — aucune couleur à moins de 4.5:1 sur fond
-14. [Formelle] Pas de couleur chaude — palette froide uniquement (bleus, verts, violets)
-15. [Formelle] Illustrations géométriques uniquement — aucune forme organique
-16. [Culturelle] Inspiration wabi-sabi japonais : imperfection, asymétrie, matières naturelles
-17. [Culturelle] Palette issue des teintures bogolan malien : terres, ocres, noirs végétaux
-18. [Culturelle] Esthétique constructiviste soviétique : diagonales, rouge, typographie de propagande
-19. [Culturelle] Art Ottoman : motifs géométriques entrelacés, arabesques, bleu Iznik et or
-20. [Culturelle] Afrofuturisme : futurisme technologique mêlé de symboliques et couleurs africaines
-21. [Culturelle] Bauhaus : fonctionnalisme, primaires, géométrie pure, sans empattement
-22. [Culturelle] Memphis design (années 80) : formes pop, couleurs criardes, motifs répétitifs
-23. [Culturelle] Gravure sur bois japonaise Ukiyo-e : aplats, contours forts, composition narrative
-24. [Culturelle] Signalétique suisse International Style : grille rigide, Helvetica, neutralité totale
-25. [Culturelle] Art déco parisien années 30 : or, symétrie, ornements stylisés, élégance froide
-26. [Culturelle] Textile kente ghanéen : bandes horizontales, motifs géométriques, couleurs vives saturées
-27. [Culturelle] Brutalisme web appliqué au print : contraste brutal, typo agressive, layout volontairement "cassé"
-28. [Culturelle] Esthétique vaporwave : rose et bleu pastel néon, glitch, grilles 3D, nostalgie 90s
-29. [Culturelle] Calligraphie coufique : lettres géométriques arabes comme motif décoratif principal
-30. [Culturelle] Folk art scandinave (Rosemaling) : motifs floraux stylisés, couleurs terreuses et bleutées
-31. [Culturelle] Ukiyo-e revisité contemporain : codes traditionnels japonais + sujet ultra-moderne
-32. [Culturelle] Design brutaliste béton : textures industrielles, gris, typographie condensée
-33. [Culturelle] Art Nouveau belge : courbes organiques inspirées de la nature, Horta, Mucha
-34. [Culturelle] Risographie : simulation d'impression riso, couleurs limitées, légère désalignement
-35. [Culturelle] Street art stencil : aplats, pochoirs, grain de texture, référence urbaine
-
-======================================================
-NOTES SUR LE CONTENU
-======================================================
-
-- Les clients (couche 1) peuvent être étendus à l'infini en respectant le format :
-  Prénom Nom — Métier précis — Ville réelle avec quartier si grande ville
-
-- Les commandes (couche 2) doivent toujours préciser : le livrable, le format, l'usage.
-  Éviter les formulations vagues du type "identité complète" sans détail.
-
-- Les publics cibles (couche 3) doivent croiser âge + CSP + comportement ou contexte.
-  Éviter les cibles trop larges ("grand public", "tout le monde").
-
-- Les contraintes culturelles (couche 4) doivent être documentables.
-  Un joueur doit pouvoir rechercher la référence et trouver des exemples visuels réels.
-  Éviter : "inspiration africaine", "style asiatique" → trop vague et potentiellement réducteur.
+cf01. Palette de 2 couleurs maximum (hors blanc et noir)
+cf02. Typographie uniquement — zéro illustration, zéro icône
+cf03. Monochrome strict (noir seul ou 1 couleur + blanc)
+cf04. Une seule famille typographique pour tout le document
+cf05. Pas de photographie — illustration vectorielle uniquement
+cf06. Composition centrée et symétrique dans les deux axes
+cf07. Grille stricte de 12 colonnes — aucun élément hors grille
+cf08. Taille de corps minimum 14pt — accessibilité premier plan
+cf09. Pas de dégradé, pas d'ombre portée — à plat uniquement
+cf10. Seulement 3 éléments visuels distincts sur l'ensemble du livrable
+cf11. Hauteur de casse uniquement (lettres capitales exclusivement)
+cf12. Format imposé : format carré — toute composition doit s'y adapter
+cf13. Contraste maximal — aucune couleur à moins de 4.5:1 sur fond
+cf14. Pas de couleur chaude — palette froide uniquement (bleus, verts, violets)
+cf15. Illustrations géométriques uniquement — aucune forme organique
+cc01. Inspiration wabi-sabi japonais : imperfection, asymétrie, matières naturelles
+cc02. Palette issue des teintures bogolan malien : terres, ocres, noirs végétaux
+cc03. Esthétique constructiviste soviétique : diagonales, rouge, typographie de propagande
+cc04. Art Ottoman : motifs géométriques entrelacés, arabesques, bleu Iznik et or
+cc05. Afrofuturisme : futurisme technologique mêlé de symboliques et couleurs africaines
+cc06. Bauhaus : fonctionnalisme, primaires, géométrie pure, sans empattement
+cc07. Memphis design (années 80) : formes pop, couleurs criardes, motifs répétitifs
+cc08. Gravure sur bois japonaise Ukiyo-e : aplats, contours forts, composition narrative
+cc09. Signalétique suisse International Style : grille rigide, Helvetica, neutralité totale
+cc10. Art déco parisien années 30 : or, symétrie, ornements stylisés, élégance froide
+cc11. Textile kente ghanéen : bandes horizontales, motifs géométriques, couleurs vives saturées
+cc12. Brutalisme web appliqué au print : contraste brutal, typo agressive, layout volontairement cassé
+cc13. Esthétique vaporwave : rose et bleu pastel néon, glitch, grilles 3D, nostalgie 90s
+cc14. Calligraphie coufique : lettres géométriques arabes comme motif décoratif principal
+cc15. Folk art scandinave (Rosemaling) : motifs floraux stylisés, couleurs terreuses et bleutées
+cc16. Ukiyo-e revisité contemporain : codes traditionnels japonais + sujet ultra-moderne
+cc17. Design brutaliste béton : textures industrielles, gris, typographie condensée
+cc18. Art Nouveau belge : courbes organiques inspirées de la nature, Horta, Mucha
+cc19. Risographie : simulation d'impression riso, couleurs limitées, légère désalignement
+cc20. Street art stencil : aplats, pochoirs, grain de texture, référence urbaine
 
 ======================================================
 FIN DU DOCUMENT

@@ -1,5 +1,4 @@
 import Button from '../Button/Button'
-import { getIllustrationUrl } from '../../utils/illustrations'
 
 function LayerPanel({ config, item, status, onRedraw, onNext, isLast }) {
   const isActive = status === 'active'
@@ -10,27 +9,16 @@ function LayerPanel({ config, item, status, onRedraw, onNext, isLast }) {
 
   return (
     <div
-      className={`relative flex-1 flex flex-col p-8 border-r border-neutral-200 last:border-r-0 overflow-hidden transition-colors duration-300 ${
+      className={`flex-1 flex flex-col p-8 border-r border-neutral-200 last:border-r-0 overflow-hidden transition-colors duration-300 ${
         isPending ? 'bg-neutral-50' : 'bg-white'
       }`}
     >
-      {/* Illustration de fond */}
-      {hasContent && (
-        <img
-          src={getIllustrationUrl(config.type, item.id, 'bg', item.ext)}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover"
-          onError={(e) => { e.currentTarget.style.display = 'none' }}
-        />
-      )}
-
       {/* En-tête */}
-      <div className="relative shrink-0 mb-6 z-10">
+      <div className="shrink-0 mb-6">
         <div className="flex items-center justify-between mb-3">
           <span className="text-xs font-mono text-neutral-400">{config.number}</span>
           {badge && (
-            <span className="text-xs border border-neutral-200 bg-white px-2 py-0.5 text-neutral-500 capitalize">
+            <span className="text-xs border border-neutral-200 px-2 py-0.5 text-neutral-500 capitalize">
               {badge}
             </span>
           )}
@@ -47,26 +35,24 @@ function LayerPanel({ config, item, status, onRedraw, onNext, isLast }) {
         </p>
       </div>
 
-      {/* Contenu centré avec cadre blanc */}
-      <div className="relative flex-1 flex items-center z-10">
+      {/* Contenu centré */}
+      <div className="flex-1 flex items-center">
         <div
-          className={`w-full transition-all duration-500 ${
+          className={`transition-all duration-500 ${
             hasContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
           }`}
         >
           {hasContent && (
-            <div className="bg-white border border-neutral-100 px-5 py-4">
-              <p className="text-lg font-medium text-neutral-900 leading-snug">
-                {config.renderContent(item)}
-              </p>
-            </div>
+            <p className="text-lg font-medium text-neutral-900 leading-snug">
+              {config.renderContent(item)}
+            </p>
           )}
         </div>
       </div>
 
       {/* Boutons */}
       <div
-        className={`relative shrink-0 flex flex-col gap-2 z-10 transition-all duration-300 ${
+        className={`shrink-0 flex flex-col gap-2 transition-all duration-300 ${
           isActive ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >

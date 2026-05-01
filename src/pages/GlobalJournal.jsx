@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
 import { LAYER_CONFIG } from '../features/brief/layerConfig'
-import { getIllustrationUrl } from '../utils/illustrations'
 
 function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('fr-FR', {
@@ -137,13 +136,6 @@ function GlobalJournal() {
                     <p className="flex-1 text-sm font-medium text-neutral-900 leading-snug">
                       {config.renderContent(data)}
                     </p>
-                    <img
-                      src={getIllustrationUrl(config.type, data?.id, 'thumb', data?.ext)}
-                      alt=""
-                      aria-hidden="true"
-                      className="shrink-0 w-12 h-12 object-cover"
-                      onError={(e) => { e.currentTarget.style.display = 'none' }}
-                    />
                   </div>
                 ))}
 

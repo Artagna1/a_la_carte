@@ -1,6 +1,6 @@
 ======================================================
 A LA CARTE — GAME DESIGN DOCUMENT (GDD)
-Version 1.0
+Version 2.0
 ======================================================
 
 ------------------------------------------------------
@@ -11,7 +11,7 @@ Nom du jeu       : A La Carte
 Genre            : Générateur de challenges créatifs solo
 Public cible     : Apprenants en design graphique / dev web, autodidactes, créatifs en quête d'entraînement
 Plateforme       : Web (digitalisable)
-Outil de rendu   : Libre (Figma, Adobe, Canva, papier… le jeu ne dicte pas)
+Outil de rendu   : lien vers un site internet
 
 Pitch :
 A La Carte est un générateur de briefs graphiques réalistes, construits couche par couche.
@@ -26,10 +26,12 @@ une contrainte créative issue d'une culture du monde. L'objectif est de produir
 
 - Réalisme d'abord : les clients ont un prénom, un métier, une ville réelle. Pas d'approximations.
 - Ouverture culturelle : les contraintes graphiques s'inspirent du monde entier, pas uniquement du vocabulaire occidental (wabi-sabi, bogolan, constructivisme, art ottoman, afrofuturisme…).
-- Liberté de tempo : le joueur choisit lui-même sa durée de travail. Le jeu ne chronomètre pas.
+- Liberté de tempo : le joueur choisit lui-même sa durée de travail parmi deux modes proposés.
 - Polyvalence du vibe : un brief peut être banal (vraiment banal, comme en vrai) ou complètement
   inattendu. Les deux ont de la valeur.
 - Pas de juge : pas de score, pas de correction automatisée. L'entraînement vaut pour lui-même.
+- Communauté par la transparence : les briefs et rendus sont visibles de tous via le journal mondial,
+  sans jugement ni hiérarchie.
 
 
 ------------------------------------------------------
@@ -58,8 +60,11 @@ COUCHE 4 — LA CONTRAINTE CRÉATIVE
   Contenu      : contrainte de couleur, typo, style graphique ou référence culturelle mondiale
   Exemple      : "Palette de 2 couleurs max, inspiration wabi-sabi japonais"
 
+→ Chaque couche est accompagnée d'une illustration minimaliste qui identifie visuellement la carte.
+  L'illustration apparaît en fond plein lors de la révélation, et en vignette dans les vues de synthèse.
+
 → Une fois les 4 couches révélées : le brief est complet.
-  Le joueur choisit sa durée de travail et se lance.
+  Le joueur choisit son mode de travail et se lance.
 
 
 ------------------------------------------------------
@@ -90,41 +95,106 @@ Cohérence inter-couches : la couche 4 (contrainte) est indépendante des autres
 5. DURÉE ET MODES DE TRAVAIL
 ------------------------------------------------------
 
-Le jeu ne propose pas de mode "Flash" ou "Projet" — il ne chronomètre pas.
-Le joueur décide lui-même après avoir lu le brief complet.
+Une fois le brief complet révélé, le joueur choisit entre deux modes de travail :
 
-Deux grandes temporalités naturelles :
-  - Session courte : 5 à 30 minutes (logo rapide, esquisse, exploration formelle)
-  - Projet court    : 1 jour à 1 semaine (identité visuelle complète, affiches finalisées)
+CARTE EXPRESS
+  Durée       : aléatoire entre 15 et 45 minutes
+  Usage       : exploration rapide, esquisse, test d'une contrainte
+  Temporalité : un compte à rebours est affiché pendant le travail
 
-La durée peut être influencée par la complexité perçue du brief ou la contrainte tirée.
-Aucune règle n'est imposée par le jeu.
+CARTE COURTE
+  Durée       : aléatoire entre 24 heures et 1 semaine
+  Usage       : identité visuelle complète, affiche finalisée, projet abouti
+  Temporalité : un compte à rebours en jours/heures est affiché
+
+→ La durée exacte est tirée aléatoirement dans la fourchette du mode choisi.
+  Elle est visible sur le résumé du brief et enregistrée dans le journal de bord.
+→ Le joueur peut aussi ignorer le timer et travailler sans contrainte de temps.
 
 
 ------------------------------------------------------
-6. CE QUE LE JEU NE FAIT PAS
+6. ILLUSTRATIONS
+------------------------------------------------------
+
+Chaque carte du jeu (client, commande, public, contrainte) est associée à deux illustrations SVG :
+
+ILLUSTRATION FOND (-bg)
+  Format  : plein écran
+  Usage   : affiché en arrière-plan de la carte lors de sa révélation dans le brief
+  Style   : illustration minimaliste explicite, identifiable au premier coup d'œil
+
+ILLUSTRATION VIGNETTE (-thumb)
+  Format  : petit format, à droite du texte
+  Usage   : affiché dans le résumé du brief, le journal personnel et le journal mondial
+  Style   : version réduite, même univers graphique
+
+Convention de nommage des fichiers SVG :
+  - Clients          : c01 à c30   → ex. c01-bg.svg, c01-thumb.svg
+  - Commandes        : o01 à o20
+  - Publics          : p01 à p20
+  - Contraintes formelles   : cf01 à cf15
+  - Contraintes culturelles : cc01 à cc20
+
+Les contraintes culturelles disposent d'une illustration à identité visuelle forte et reconnaissable,
+ancrée dans la référence culturelle qu'elles représentent.
+
+
+------------------------------------------------------
+7. COMPTE UTILISATEUR
+------------------------------------------------------
+
+Le joueur peut créer un compte pour accéder aux fonctionnalités de suivi.
+
+INSCRIPTION / CONNEXION
+  - Email + mot de passe
+  - Nom d'artiste : pseudonyme choisi à l'inscription, affiché dans le journal mondial
+
+JOURNAL PERSONNEL
+  - Historique de tous les briefs générés par le joueur connecté
+  - Chaque brief affiche : date, mode, durée, les 4 couches, lien vers le rendu
+  - Le joueur peut ajouter ou modifier un lien vers son rendu (Behance, portfolio…)
+  - Possibilité de supprimer un brief individuel
+
+GESTION DU COMPTE
+  - Suppression du compte : supprime le compte et tous les briefs associés définitivement
+
+
+------------------------------------------------------
+8. JOURNAL MONDIAL
+------------------------------------------------------
+
+Fonctionnalité communautaire accessible sans connexion depuis n'importe quelle page du site.
+
+  - Affiche tous les briefs publiés par l'ensemble des joueurs, dans l'ordre chronologique inverse
+  - Pour chaque brief : nom d'artiste, date, mode, durée, les 4 couches, lien vers le rendu si renseigné
+  - Lecture seule — aucune interaction (pas de like, pas de commentaire)
+  - Visible uniquement si le joueur a renseigné son nom d'artiste au moment de l'inscription
+
+Philosophie : transparence et émulation par l'exemple, sans hiérarchie ni compétition.
+
+
+------------------------------------------------------
+9. CE QUE LE JEU NE FAIT PAS
 ------------------------------------------------------
 
 - Il ne juge pas le rendu
 - Il ne corrige pas
-- Il ne chronomètre pas
 - Il ne dicte pas l'outil
 - Il n'impose pas de niveau (débutant / avancé)
-- Il ne sauvegarde pas (dans cette version 1.0)
+- Il ne force pas la durée (les modes sont un choix, pas une obligation)
 
 
 ------------------------------------------------------
-7. ÉVOLUTIONS FUTURES ENVISAGÉES
+10. ÉVOLUTIONS FUTURES ENVISAGÉES
 ------------------------------------------------------
 
-- Journal de bord : historique des briefs tirés + possibilité d'uploader son rendu
 - Mode Série : 3 briefs liés par un même client fictif (cohérence de marque sur plusieurs livrables)
 - Système de tags : filtrer les couches selon ce qu'on veut travailler (ex : "je veux un brief culturel")
 - Version multiplayer : chaque joueur tire le même brief, comparaison des rendus
 
 
 ------------------------------------------------------
-8. NOTES DE DESIGN IMPORTANTES
+11. NOTES DE DESIGN IMPORTANTES
 ------------------------------------------------------
 
 - Les clients fictifs doivent sonner vrai : un prénom banal, un vrai quartier, un vrai secteur.
@@ -138,6 +208,9 @@ Aucune règle n'est imposée par le jeu.
   "un logo principal + version monochrome + favicon, format SVG et PNG".
 
 - L'ensemble du brief doit être lisible en 30 secondes. Pas de sur-explication.
+
+- Les illustrations doivent permettre l'identification immédiate d'une carte sans lire le texte.
+  Elles ne sont pas décoratives — elles sont fonctionnelles.
 
 ======================================================
 FIN DU DOCUMENT

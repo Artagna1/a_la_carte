@@ -8,7 +8,6 @@ import { useSaveBrief } from '../hooks/useSaveBrief'
 import { useBriefStore } from '../store/briefStore'
 import { LAYER_CONFIG } from '../features/brief/layerConfig'
 import Button from '../components/Button/Button'
-import { getIllustrationUrl } from '../utils/illustrations'
 
 const MODE_LABELS = {
   express: 'Carte express',
@@ -114,13 +113,6 @@ function Summary() {
                     </span>
                   )}
                 </div>
-                <img
-                  src={getIllustrationUrl(config.type, item.id, 'thumb', item.ext)}
-                  alt=""
-                  aria-hidden="true"
-                  className="shrink-0 w-16 h-16 object-cover"
-                  onError={(e) => { e.currentTarget.style.display = 'none' }}
-                />
               </div>
             )
           })}
