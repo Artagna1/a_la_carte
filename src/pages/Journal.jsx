@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../hooks/useAuth'
+import { useDeleteAccount } from '../hooks/useDeleteAccount'
 import { LAYER_CONFIG } from '../features/brief/layerConfig'
 
 function formatDate(dateStr) {
@@ -25,10 +26,14 @@ function formatDuration(seconds, mode) {
 
 function Journal() {
   const { user, logout } = useAuth()
+  const { deleteAccount, loading: deleting, error: deleteError } = useDeleteAccount()
   const [briefs, setBriefs] = useState([])
   const [loading, setLoading] = useState(true)
   const [linkInputs, setLinkInputs] = useState({})
   const [editingLink, setEditingLink] = useState(null)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const [confirmDelete, setConfirmDelete] = useState(false)
+  const menuRef = useRef(null)
 
   useEffect(() => {
     supabase
@@ -41,6 +46,16 @@ function Journal() {
       })
   }, [])
 
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setMenuOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
+
   async function deleteBrief(id) {
     await supabase.from('briefs').delete().eq('id', id)
     setBriefs((prev) => prev.filter((b) => b.id !== id))
@@ -49,7 +64,6 @@ function Journal() {
   async function saveLink(briefId) {
     const url = (linkInputs[briefId] ?? '').trim()
     if (!url) return
-
     await supabase.from('briefs').update({ render_url: url }).eq('id', briefId)
     setBriefs((prev) =>
       prev.map((b) => (b.id === briefId ? { ...b, render_url: url } : b))
@@ -62,6 +76,11 @@ function Journal() {
     setEditingLink(briefId)
   }
 
+  function handleDeleteClick() {
+    setMenuOpen(false)
+    setConfirmDelete(true)
+  }
+
   return (
     <main className="min-h-screen bg-neutral-50 flex flex-col px-8 py-6">
       <header className="flex items-center justify-between mb-10">
@@ -71,18 +90,75 @@ function Journal() {
         >
           À la Carte
         </Link>
+
         <div className="flex items-center gap-5">
-          <span className="text-xs text-neutral-400">
-            {user?.user_metadata?.nom_artiste ?? ''}
-          </span>
+          <span className="text-xs text-neutral-400">{user?.user_metadata?.nom_artiste ?? ''}</span>
+          <Link
+            to="/monde"
+            className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+          >
+            Journal mondial
+          </Link>
           <button
             onClick={logout}
             className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors cursor-pointer"
           >
             Déconnexion
           </button>
+
+          <div className="relative" ref={menuRef}>
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              className="flex flex-col gap-1.5 p-1 cursor-pointer group"
+              aria-label="Menu"
+            >
+              <span className="block w-5 h-px bg-neutral-500 group-hover:bg-neutral-900 transition-colors" />
+              <span className="block w-5 h-px bg-neutral-500 group-hover:bg-neutral-900 transition-colors" />
+              <span className="block w-5 h-px bg-neutral-500 group-hover:bg-neutral-900 transition-colors" />
+            </button>
+
+            {menuOpen && (
+              <div className="absolute right-0 top-full mt-2 w-52 bg-white border border-neutral-200 shadow-sm z-10">
+                <div className="py-1">
+                  <button
+                    onClick={handleDeleteClick}
+                    className="w-full text-left px-4 py-2 text-xs text-red-400 hover:bg-red-50 transition-colors cursor-pointer"
+                  >
+                    Supprimer mon compte
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </header>
+
+      {confirmDelete && (
+        <div className="max-w-2xl w-full mx-auto mb-6 border border-red-200 bg-red-50 px-5 py-4 flex items-center justify-between gap-4">
+          <p className="text-xs text-red-700">Cette action est irréversible. Tous tes briefs seront supprimés.</p>
+          <div className="flex items-center gap-3 shrink-0">
+            <button
+              onClick={deleteAccount}
+              disabled={deleting}
+              className="text-xs text-white bg-red-500 hover:bg-red-600 px-3 py-1.5 transition-colors cursor-pointer disabled:opacity-50"
+            >
+              {deleting ? 'Suppression…' : 'Confirmer'}
+            </button>
+            <button
+              onClick={() => setConfirmDelete(false)}
+              className="text-xs text-red-400 hover:text-red-700 transition-colors cursor-pointer"
+            >
+              Annuler
+            </button>
+          </div>
+        </div>
+      )}
+
+      {deleteError && (
+        <div className="max-w-2xl w-full mx-auto mb-4">
+          <p className="text-xs text-red-500">{deleteError}</p>
+        </div>
+      )}
 
       <div className="max-w-2xl w-full mx-auto">
         <div className="mb-10">
@@ -157,17 +233,22 @@ function Journal() {
                 ))}
 
                 {/* Lien vers le rendu */}
-                <div className="px-6 py-4">
+                <div className="px-6 py-4 border-t border-neutral-100">
                   {brief.render_url && editingLink !== brief.id ? (
                     <div className="flex items-center justify-between gap-4">
-                      <a
-                        href={brief.render_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs text-neutral-500 underline underline-offset-2 hover:text-neutral-800 truncate transition-colors"
-                      >
-                        {brief.render_url}
-                      </a>
+                      <div className="flex items-center gap-3 min-w-0">
+                        <span className="shrink-0 text-xs uppercase tracking-widest text-neutral-400">
+                          Mon rendu
+                        </span>
+                        <a
+                          href={brief.render_url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs font-medium text-neutral-900 hover:underline underline-offset-2 truncate transition-colors"
+                        >
+                          Voir le résultat →
+                        </a>
+                      </div>
                       <button
                         onClick={() => startEditing(brief.id, brief.render_url)}
                         className="shrink-0 text-xs text-neutral-400 hover:text-neutral-700 transition-colors cursor-pointer"
@@ -176,23 +257,28 @@ function Journal() {
                       </button>
                     </div>
                   ) : (
-                    <div className="flex gap-2">
-                      <input
-                        type="url"
-                        placeholder="Lien vers ton rendu (Behance, portfolio…)"
-                        value={linkInputs[brief.id] ?? ''}
-                        onChange={(e) =>
-                          setLinkInputs((prev) => ({ ...prev, [brief.id]: e.target.value }))
-                        }
-                        onKeyDown={(e) => e.key === 'Enter' && saveLink(brief.id)}
-                        className="flex-1 border border-neutral-200 px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-300 outline-none focus:border-neutral-500 transition-colors"
-                      />
-                      <button
-                        onClick={() => saveLink(brief.id)}
-                        className="px-4 py-2 bg-neutral-900 text-white text-xs hover:bg-neutral-700 transition-colors cursor-pointer"
-                      >
-                        Enregistrer
-                      </button>
+                    <div className="flex flex-col gap-2">
+                      <span className="text-xs uppercase tracking-widest text-neutral-400">
+                        Mon rendu
+                      </span>
+                      <div className="flex gap-2">
+                        <input
+                          type="url"
+                          placeholder="Colle le lien vers ton résultat (Behance, portfolio…)"
+                          value={linkInputs[brief.id] ?? ''}
+                          onChange={(e) =>
+                            setLinkInputs((prev) => ({ ...prev, [brief.id]: e.target.value }))
+                          }
+                          onKeyDown={(e) => e.key === 'Enter' && saveLink(brief.id)}
+                          className="flex-1 border border-neutral-200 px-3 py-2 text-xs text-neutral-900 placeholder:text-neutral-300 outline-none focus:border-neutral-500 transition-colors"
+                        />
+                        <button
+                          onClick={() => saveLink(brief.id)}
+                          className="px-4 py-2 bg-neutral-900 text-white text-xs hover:bg-neutral-700 transition-colors cursor-pointer"
+                        >
+                          Enregistrer
+                        </button>
+                      </div>
                     </div>
                   )}
                 </div>

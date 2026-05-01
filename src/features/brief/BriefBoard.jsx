@@ -25,6 +25,12 @@ function BriefBoard() {
       <header className="shrink-0 border-b border-neutral-200 px-8 py-4 flex items-center justify-between">
         <span className="text-sm font-semibold tracking-tight text-neutral-900">À la Carte</span>
         <div className="flex items-center gap-5">
+          <Link
+            to="/monde"
+            className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+          >
+            Journal mondial
+          </Link>
           {user ? (
             <>
               <Link

@@ -17,6 +17,7 @@ export function useSaveBrief(layers) {
       .from('briefs')
       .insert({
         user_id: user.id,
+        nom_artiste: user.user_metadata?.nom_artiste ?? '',
         client: layers[0],
         commande: layers[1],
         public_cible: layers[2],

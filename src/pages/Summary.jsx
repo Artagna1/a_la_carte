@@ -46,6 +46,12 @@ function Summary() {
       <header className="flex items-center justify-between mb-10">
         <span className="text-sm font-semibold tracking-tight text-neutral-900">À la Carte</span>
         <div className="flex items-center gap-5">
+          <Link
+            to="/monde"
+            className="text-xs text-neutral-500 hover:text-neutral-800 transition-colors"
+          >
+            Journal mondial
+          </Link>
           {user ? (
             <>
               <Link
